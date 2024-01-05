@@ -1,36 +1,35 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ChapterService } from './chapter.service';
-import { ChapterEntity } from './chapter.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { CreateChapterDto } from './dto/create-chapter.dto';
+import { UpdateChapterDto } from './dto/update-chapter.dto';
 
-@ApiTags('chapters')
 @Controller('chapters')
 export class ChapterController {
   constructor(private readonly chapterService: ChapterService) {}
 
   @Get()
-  getAllChapters(): Promise<ChapterEntity[]> {
+  getAllChapters() {
     return this.chapterService.getAllChapters();
   }
 
   @Get(':id')
-  getChapterById(@Param('id') id: number): Promise<ChapterEntity> {
-    return this.chapterService.getChapterById(id);
+  getChapterById(@Param('id') id: string) {
+    return this.chapterService.getChapterById(+id);
   }
 
   @Post()
-  createChapter(@Body() chapterData: ChapterEntity): Promise<ChapterEntity> {
-    return this.chapterService.createChapter(chapterData);
+  create(@Body() createChapterDto: CreateChapterDto) {
+    return this.chapterService.create(createChapterDto);
   }
 
   @Put(':id')
-  updateChapter(@Param('id') id: number, @Body() chapterData: ChapterEntity): Promise<ChapterEntity> {
-    return this.chapterService.updateChapter(id, chapterData);
+  update(@Param('id') id: string, @Body() updateChapterDto: UpdateChapterDto) {
+    return this.chapterService.update(+id, updateChapterDto);
   }
 
   @Delete(':id')
-  deleteChapter(@Param('id') id: number): Promise<void> {
-    return this.chapterService.deleteChapter(id);
+  delete(@Param('id') id: string) {
+    return this.chapterService.delete(+id);
   }
 }

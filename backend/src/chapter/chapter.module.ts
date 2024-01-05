@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
+import { ChapterEntity } from './chapter.entity';
 import { ChapterController } from './chapter.controller';
 import { ChapterService } from './chapter.service';
-import { ChapterRepository } from './chapter.repository';
+
 
 @Module({
-	controllers: [ChapterController],
-	providers: [ChapterService, ChapterRepository],
+	imports: [ChapterEntity],
+  controllers: [ChapterController],
+	providers: [ChapterService],
 })
-export class ChapterModule {}
+export class Chapter {}

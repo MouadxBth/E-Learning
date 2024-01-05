@@ -1,35 +1,28 @@
 /* eslint-disable prettier/prettier */
+
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ChapterEntity } from './chapter.entity';
+import { CreateChapterDto } from './dto/create-chapter.dto';
+import { UpdateChapterDto } from './dto/update-chapter.dto';
 
 @Injectable()
 export class ChapterService {
-  constructor(
-    @InjectRepository(ChapterEntity)
-    private readonly chapterRepository: Repository<ChapterEntity>,
-  ) {}
-
-  async getAllChapters(): Promise<ChapterEntity[]> {
-    return await this.chapterRepository.find();
+  create(createChapterDto: CreateChapterDto) {
+    return 'Ajouter un chapitre';
   }
 
-  async getChapterById(id: number): Promise<ChapterEntity | undefined> {
-    return await this.chapterRepository.findOne({ where: { id } });
+  getAllChapters() {
+    return `Afficher tous les chapitres`;
   }
 
-  async createChapter(chapterData: Partial<ChapterEntity>): Promise<ChapterEntity> {
-    const newChapter = this.chapterRepository.create(chapterData);
-    return await this.chapterRepository.save(newChapter);
+  getChapterById(id: number) {
+    return `Afficher ce chapitre : #${id}`;
   }
 
-  async updateChapter(id: number, chapterData: Partial<ChapterEntity>): Promise<ChapterEntity | undefined> {
-    await this.chapterRepository.update(id, chapterData);
-    return await this.chapterRepository.findOne({ where: { id } });
+  update(id: number, updateChapterDto: UpdateChapterDto) {
+    return `Mettre à jour le chapitre suivant : #${id}`;
   }
 
-  async deleteChapter(id: number): Promise<void> {
-    await this.chapterRepository.delete(id);
+  delete(id: number) {
+    return `Supprimer le chapitre suivant : #${id}`;
   }
 }
