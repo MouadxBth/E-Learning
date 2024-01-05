@@ -1,35 +1,28 @@
 /* eslint-disable prettier/prettier */
+
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CourseEntity } from './course.entity';
+import { CreateCourseDto } from './dto/create-course.dto';
+import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Injectable()
 export class CourseService {
-  constructor(
-    @InjectRepository(CourseEntity)
-    private readonly courseRepository: Repository<CourseEntity>,
-  ) {}
-
-  async getAllCourses(): Promise<CourseEntity[]> {
-    return await this.courseRepository.find();
+  create(createCourseDto: CreateCourseDto) {
+    return 'ajouter un cours';
   }
 
-  async getCourseById(id: number): Promise<CourseEntity> {
-    return await this.courseRepository.findOne({ where: { id } });
+  getAllCourses() {
+    return `Afficher tous les cours`;
   }
 
-  async createCourse(courseData: CourseEntity): Promise<CourseEntity> {
-    const newCourse = this.courseRepository.create(courseData);
-    return await this.courseRepository.save(newCourse);
+  getCourseById(id: number) {
+    return `afficher ce cours : #${id}`;
   }
 
-  async updateCourse(id: number, courseData: CourseEntity): Promise<CourseEntity> {
-    await this.courseRepository.update(id, courseData);
-    return await this.courseRepository.findOne({ where: { id } });
+  update(id: number, updateCourseDto: UpdateCourseDto) {
+    return `update le cours suivant : #${id}`;
   }
 
-  async deleteCourse(id: number): Promise<void> {
-    await this.courseRepository.delete(id);
+  delete(id: number) {
+    return `supprimer le cours suivant : #${id}`;
   }
 }
