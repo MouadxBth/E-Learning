@@ -1,0 +1,126 @@
+.hero {
+  padding: 3rem 15rem;
+  padding-top: 12rem;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 75em) {
+  .hero {
+    padding: 2rem 10rem;
+    padding-top: 12rem;
+  }
+}
+@media (max-width: 48em) {
+  .hero {
+    flex-direction: column;
+    padding: 2rem 5rem;
+    align-items: flex-start;
+    padding-top: 12rem;
+  }
+}
+.hero__x {
+  margin-right: 4rem;
+}
+@media (max-width: 48em) {
+  .hero__x {
+    order: 2;
+    margin-top: 10rem;
+    text-align: center;
+    margin-right: 0;
+  }
+}
+.hero__title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 4rem;
+  color: hsl(229, 31%, 21%);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.hero__title-mobile {
+  display: none;
+}
+@media (max-width: 48em) {
+  .hero__title-mobile {
+    display: block;
+  }
+}
+.hero__title-desktop {
+  display: block;
+}
+@media (max-width: 48em) {
+  .hero__title-desktop {
+    display: none;
+  }
+}
+@media (max-width: 75em) {
+  .hero__title {
+    font-size: 3.5rem;
+  }
+}
+@media (max-width: 56.25em) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+}
+.hero__desc {
+  font-size: 1.8rem;
+  color: hsl(229, 8%, 60%);
+  margin-bottom: 4rem;
+  line-height: 1.5;
+}
+@media (max-width: 75em) {
+  .hero__desc {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+}
+.hero__desc-mobile {
+  display: none;
+}
+@media (max-width: 48em) {
+  .hero__desc-mobile {
+    display: block;
+  }
+}
+.hero__desc-desktop {
+  display: block;
+}
+@media (max-width: 48em) {
+  .hero__desc-desktop {
+    display: none;
+  }
+}
+.hero__cta {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 48em) {
+  .hero__cta {
+    justify-content: center;
+  }
+}
+.hero__y {
+  position: relative;
+  margin-right: -15rem;
+  margin-left: auto;
+}
+@media (max-width: 75em) {
+  .hero__y {
+    margin-right: -10rem;
+  }
+}
+@media (max-width: 48em) {
+  .hero__y {
+    order: 1;
+    margin-right: -5rem;
+  }
+}
+.hero__illustrations {
+  width: 100%;
+  margin-left: -3rem;
+}
+
+.me-2 {
+  margin-right: 2rem;
+}/*# sourceMappingURL=hero.component.css.map */
