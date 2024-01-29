@@ -10,20 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserType {
-	ADMIN
-	TEACHER
-	STUDENT
-}
 
 model User {
 	email   String @id
 	password	String?
 
-	type UserType @default(STUDENT)
-
 	createdAt  DateTime @default(now())
 	updatedAt  DateTime @updatedAt
+
+	twoFactorAuthenticationEnabled	Boolean @default(false)
+	twoFactorAuthenticationFirstTime	Boolean @default(true)
+	twoFactorAuthenticationSecret	String?
 
 	firstName  String?
 	lastName   String?
@@ -33,6 +30,22 @@ model User {
 	authoredCourses Course[] @relation("AuthoredCourses")
 
 	authoredReviews Review[] @relation("AuthoredReviews")
+
+	enrolledCourses UserEnrolledCourse[] @relation("EnrolledCourses")
+}
+
+model UserEnrolledCourse {
+	user User @relation(name: "EnrolledCourses" ,fields: [userId], references: [email])
+	userId String
+
+	course Course @relation(name: "EnrolledCourses", fields: [courseId], references: [name])
+	courseId String
+
+	enrolledAt DateTime
+
+	progress Int
+
+	@@id([userId, courseId])
 }
 
 
@@ -51,6 +64,9 @@ model Course {
 	chapters Chapter[] @relation("Chapters")
 
 	reviews Review[] @relation("Reviews")
+
+	enrolledMembers UserEnrolledCourse[] @relation("EnrolledCourses")
+
 }
 
 model Chapter {
@@ -70,6 +86,8 @@ model Quiz {
 	id Int @id @default(autoincrement())
 
 	title String
+
+	passed Boolean
 
 	questions Question[] @relation("Questions")
 
